@@ -13,7 +13,7 @@ const ClientRoutes = () => {
   useEffect(() => {
     dispatch(me());
   }, [])
-
+  
   return (
     <>
       <Navbar/>
@@ -28,8 +28,4 @@ const ClientRoutes = () => {
 }
 
 
-
-
-// // The `withRouter` wrapper makes sure that updates are not blocked
-// // when the url changes
 export default ClientRoutes
