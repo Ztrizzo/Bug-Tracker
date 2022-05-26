@@ -60,13 +60,21 @@ const mapSignup = (state) => {
 const mapDispatch = (dispatch) => {
   
   return {
-    handleSubmit(evt, navigate) {
+    handleSubmit: async function handleSubmit(evt, navigate) {
       evt.preventDefault()
       const formName = evt.target.name
       const username = evt.target.username.value
       const password = evt.target.password.value
-      dispatch(authenticate(username, password, formName))
-      navigate('/');
+      try{
+        await dispatch(authenticate(username, password, formName, navigate)).unwrap();
+
+      }
+      catch(error){
+        console.log(error);
+      }
+      
+      
+      
     }
   }
 }
