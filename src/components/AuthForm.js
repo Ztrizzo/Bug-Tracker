@@ -66,7 +66,7 @@ const mapDispatch = (dispatch) => {
       const username = evt.target.username.value
       const password = evt.target.password.value
       try{
-        await dispatch(authenticate(username, password, formName, navigate)).unwrap();
+        await dispatch(authenticate(username, password, formName, navigate));
 
       }
       catch(error){
