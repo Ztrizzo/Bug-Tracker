@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@auth0/auth0-react": "^1.10.2",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "express": "^4.18.1",
+    "jest": "^28.1.2",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.16",
@@ -34,7 +36,8 @@
     "start:dev": "npm run build:dev & npm run start-server",
     "start:dev:logger": "LOGGING=true npm run start:dev",
     "start:dev:seed": "SEED=true npm run start:dev",
-    "start-server": "JWT=shh nodemon server -e html,js,scss --ignore public --ignore src"
+    "start-server": "JWT=shh nodemon server -e html,js,scss --ignore public --ignore src",
+    "test": "jest --watch"
   },
   "eslintConfig": {
     "extends": [

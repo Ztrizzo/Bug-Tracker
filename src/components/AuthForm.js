@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {authenticate} from '../store'
 import { useNavigate } from 'react-router-dom'
-
+import { useAuth0 } from "@auth0/auth0-react";
 
 /**
  * COMPONENT
@@ -10,9 +10,12 @@ import { useNavigate } from 'react-router-dom'
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props;
   const navigate = useNavigate();
+  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
+
+  console.log(useAuth0());
   return (
     <div>
-      <form onSubmit={(event) => handleSubmit(event, navigate)} name={name}>
+      {/* <form onSubmit={(event) => loginWithRedirect()} name={name}>
         <div>
           <label htmlFor="username">
             <small>Username</small>
@@ -29,7 +32,14 @@ const AuthForm = props => {
           <button type="submit">{displayName}</button>
         </div>
         {error && error.response && <div> {error.response.data} </div>}
-      </form>
+      </form> */}
+      {
+        useAuth0().isAuthenticated ? 
+          <button onClick={() => logout()}>LOGOUT</button>
+          :
+          <button onClick={() => loginWithRedirect()}>LOGIN</button>
+      }
+      
     </div>
   )
 }
