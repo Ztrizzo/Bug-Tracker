@@ -1,55 +1,18 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const TOKEN = 'token'
+const SET_AUTH = 'SET_AUTH';
 
-/**
- * ACTION TYPES
- */
-const SET_AUTH = 'SET_AUTH'
-
-/**
- * ACTION CREATORS
- */
 const setAuth = auth => ({type: SET_AUTH, auth})
 
-/**
- * THUNK CREATORS
- */
-export const me = () => async dispatch => {
-  const token = window.localStorage.getItem(TOKEN)
-  if (token) {
-    const res = await axios.get('/auth/me', {
-      headers: {
-        authorization: token
-      }
-    })
-    return dispatch(setAuth(res.data))
+export const me = () => {
+  return async (dispatch) => {
+    const res = (await axios.get('/auth/me')).data
+    return dispatch(setAuth(res))
   }
 }
 
-export const authenticate = (username, password, method, navigate) => async dispatch => {
-  try {
-    const res = await axios.post(`/auth/${method}`, {username, password})
-    window.localStorage.setItem(TOKEN, res.data.token)
-    dispatch(me())
-    navigate('/');
-  } catch (authError) {
-    return dispatch(setAuth({error: authError}));
-  }
-}
 
-export const logout = () => {
-  window.localStorage.removeItem(TOKEN)
-  return {
-    type: SET_AUTH,
-    auth: {}
-  }
-}
-
-/**
- * REDUCER
- */
-export default function(state = {}, action) {
+export default function auth(state = {}, action) {
   switch (action.type) {
     case SET_AUTH:
       return action.auth

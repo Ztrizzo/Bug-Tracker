@@ -2,7 +2,21 @@ const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
 const app = express()
+require('dotenv').config();
+const { auth } = require('express-openid-connect');
 module.exports = app
+
+//Middleware from Auth0
+const config = {
+  authRequired: false,
+  auth0Logout: true,
+  secret: process.env.APP_SECRET,
+  baseURL: process.env.BASE_URL,
+  clientID: process.env.CLIENT_ID,
+  issuerBaseURL: process.env.ISSUER
+};
+app.use(auth(config));
+
 
 // logging middleware
 app.use(morgan('dev'))
@@ -10,11 +24,15 @@ app.use(morgan('dev'))
 // body parsing middleware
 app.use(express.json())
 
+
 // auth and api routes
 app.use('/auth', require('./auth'))
 app.use('/api', require('./api'))
 
-app.get('/', (req, res)=> res.sendFile(path.join(__dirname, '..', 'public/index.html')));
+app.get('/', (req, res)=> {
+  res.sendFile(path.join(__dirname, '..', 'public/index.html'))
+});
+
 
 // static file-serving middleware
 app.use(express.static(path.join(__dirname, '..', 'public')))
