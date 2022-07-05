@@ -8,10 +8,7 @@ beforeEach(async() => {
   users = (await seed()).users;
 })
 
-test('User model', () => {
-
-  
-})
+test('generate')
 
 
 
