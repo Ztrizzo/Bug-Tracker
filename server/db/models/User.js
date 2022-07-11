@@ -5,6 +5,10 @@ const User = db.define('user', {
   sub: {
     type: Sequelize.STRING,
     primaryKey: true
+  },
+  role:{
+    type: Sequelize.ENUM('developer', 'manager', 'employee'),
+    defaultValue: 'employee'
   }
 })
 
