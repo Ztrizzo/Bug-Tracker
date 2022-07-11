@@ -15,7 +15,8 @@ const config = {
   clientID: process.env.CLIENT_ID,
   issuerBaseURL: process.env.ISSUER
 };
-app.use(auth(config));
+// if(process.env.NODE_ENV !== 'test')
+  app.use(auth(config));
 
 
 // logging middleware

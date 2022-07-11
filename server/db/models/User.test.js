@@ -1,14 +1,36 @@
 /* global describe beforeEach it */
 const { db, models: { User } } = require('../index')
 const seed = require('../../../script/seed');
-const jwt = require('jsonwebtoken');
 
-let users;
+let numUsers;
+const exampleId = 'google-oauth2|102351959334608151680';
+
+// let users;
 beforeEach(async() => {
-  users = (await seed()).users;
+  await seed();
+  numUsers = (await User.findAll()).length;
+
 })
 
-test('generate')
+describe('User', () => {
+  test('findOrCreate creates a user if the id doesnt exist', async () => {
+    const user = await User.findOrCreate(exampleId);
+    const newUserCount = (await User.findAll()).length;
+    expect(typeof user).toBe('object');
+    expect(newUserCount).toBe(numUsers + 1);
+    numUsers++;
+  });
+  
+    
+  
+  test('findOrCreate returns the user object if it already exists', async () => {
+    const user = await User.findOrCreate(exampleId);
+    expect(typeof user).toBe('object');
+    expect(user.sub).toBe(exampleId);
+  });
+  
+})
+
 
 
 
