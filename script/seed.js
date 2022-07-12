@@ -1,6 +1,7 @@
 'use strict'
 
-const {db, models: {User} } = require('../server/db')
+const {db, models: {User, Ticket, Comment} } = require('../server/db')
+const faker = require('faker');
 
 /**
  * seed - this function clears the database, updates tables to
@@ -10,20 +11,29 @@ async function seed() {
   await db.sync({ force: true }) // clears db and matches models to tables
   console.log('db synced!')
 
-  // Creating Users
-  // const users = await Promise.all([
-  //   User.create({ username: 'cody', password: '123' }),
-  //   User.create({ username: 'murphy', password: '123' }),
-  // ])
+  //Creating users
+  const users = [];
+  for(let i = 0; i < 5; i++){
+    users.push(await User.create({sub: faker.name.firstName()}))
+  }
 
-  // console.log(`seeded ${users.length} users`)
-  // console.log(`seeded successfully`)
-  // return {
-  //   users: {
-  //     cody: users[0],
-  //     murphy: users[1]
-  //   }
-  // }
+
+  //Creating tickets
+  const tickets = [];
+  for(let i = 0; i < 50; i++){
+    tickets.push(
+      await Ticket.create({
+        title: faker.lorem.lines(1), 
+        description: faker.lorem.paragraph(), 
+        createdBy: users[Math.floor(Math.random() * users.length)].name}))
+  }
+
+  //Creating comments
+  const comments = [];
+  for(let i = 0; i < 30; i++){
+    comments.push(await Comment.create({content: faker.lorem.paragraph()}))
+  }
+
 }
 
 /*
