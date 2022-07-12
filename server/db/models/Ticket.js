@@ -7,7 +7,7 @@ const Ticket = db.define('ticket', {
     type: Sequelize.STRING
   },
   description: {
-    type: Sequelize.STRING
+    type: Sequelize.TEXT
   },
   createdBy: {
     type: Sequelize.STRING
