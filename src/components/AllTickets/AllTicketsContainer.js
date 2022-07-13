@@ -6,9 +6,9 @@ export default function AllTicketsContainer(){
   const [allTickets, setAllTickets] = useState([]);
   
   useEffect(() => {
-    axios.get('/allTickets')
+    axios.get('/api/tickets')
     .then(
-      (res) => console.log(res)
+      (res) => setAllTickets(res.data)
     )
   }, [])
 
