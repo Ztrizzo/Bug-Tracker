@@ -7,6 +7,14 @@ const Comment = require('./models/Comment');
 const Ticket = require('./models/Ticket');
 
 //associations could go here!
+User.hasMany(Ticket);
+Ticket.belongsTo(User);
+
+User.hasMany(Comment);
+Comment.belongsTo(User);
+
+Ticket.hasMany(Comment);
+Comment.belongsTo(Ticket);
 
 module.exports = {
   db,

@@ -5,11 +5,10 @@ module.exports = router;
 
 router.get('/me', async (req, res, next) => {
   try {
-    // console.log(req.oidc.isAuthenticated());
+    let user;
     if(req.oidc.isAuthenticated())
-      await User.findOrCreate(req.oidc.user.sub);
-    res.send(req.oidc.user || {});
-    res.sendStatus(200);
+      user = await User.findOrCreate(req.oidc.user.sub);
+    res.send({...user, ...req.oidc.user} || {});
   } catch (ex) {
     next(ex)
   }
