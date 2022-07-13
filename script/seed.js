@@ -14,7 +14,7 @@ async function seed() {
   //Creating users
   const users = [];
   for(let i = 0; i < 5; i++){
-    users.push(await User.create({sub: faker.name.firstName()}))
+    users.push(await User.create({id: faker.name.firstName()}))
   }
 
 
@@ -25,7 +25,10 @@ async function seed() {
       await Ticket.create({
         title: faker.lorem.lines(1), 
         description: faker.lorem.paragraph(), 
-        createdBy: users[Math.floor(Math.random() * users.length)].name}))
+        createdBy: users[Math.floor(Math.random() * users.length)].name,
+        userId: users[Math.floor(Math.random() * users.length)].id
+      }))
+
   }
 
   //Creating comments
