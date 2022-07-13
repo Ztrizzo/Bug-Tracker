@@ -1,7 +1,10 @@
 import React from "react";
 
-export default function AllTickets(){
+export default function AllTickets({ allTickets }){
+  console.log(allTickets)
   return (
-    <h1>ALL TICKETS</h1>
+    <div>
+      {JSON.stringify(allTickets)}
+    </div>
   )
 }

@@ -14,7 +14,7 @@ async function seed() {
   //Creating users
   const users = [];
   for(let i = 0; i < 5; i++){
-    users.push(await User.create({id: faker.name.firstName()}))
+    users.push(await User.create({id: faker.name.firstName(), role:'developer'}))
   }
 
 
