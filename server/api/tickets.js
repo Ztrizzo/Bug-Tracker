@@ -10,3 +10,13 @@ router.get('/', async(req, res, next) => {
     next(error);
   }
 })
+
+router.get('/:id', async (req, res, next) => {
+  try{
+    console.log(req.params.id);
+    res.send(await Ticket.findByPk(req.params.id));
+  }
+  catch(error){
+    next(error);
+  }
+})

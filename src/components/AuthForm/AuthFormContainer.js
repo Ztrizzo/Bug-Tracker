@@ -1,8 +1,10 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
 import { useSelector } from "react-redux";
 import AuthForm from "./AuthForm";
 
 export default function AuthFormContainer(){
-  const isLoggedIn = useSelector(state => !!state.auth.sub);
-  return ( <AuthForm isLoggedIn={isLoggedIn}/>)
+  const {loginWithRedirect, logout, isAuthenticated} = useAuth0();
+  
+  return ( <AuthForm loginWithRedirect={loginWithRedirect} logout={logout} isLoggedIn={isAuthenticated}/>)
 }

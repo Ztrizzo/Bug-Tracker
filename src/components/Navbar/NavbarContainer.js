@@ -1,11 +1,17 @@
-import React from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import React, {useState} from "react";
 import { useSelector } from "react-redux";
 import Navbar from "./Navbar";
 
 export default function NavbarContainer(){
-  const isLoggedIn = useSelector(state => !!state.auth.email);
-  const role = useSelector(state => state.auth.role);
+  const {isAuthenticated, user, isLoading} = useAuth0();
+  let role;
+
+  if(!isLoading){
+    role = user[`http://localhost:8080/roles`][0];
+  }
+
   return(
-    <Navbar isLoggedIn={isLoggedIn} role={role}/>
+    <Navbar isLoggedIn={isAuthenticated} role={role}/>
   )
 }
