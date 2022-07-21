@@ -3,17 +3,18 @@ import React from 'react';
 /**
  * COMPONENT
  */
-export default function AuthForm({ isLoggedIn }){
+export default function AuthForm({ loginWithRedirect, logout, isLoggedIn }){
 
 
   return (
     <div>
       {
         isLoggedIn ?
-          <a href='/logout'>Logout</a> 
+          <button onClick={logout}>Log Out</button>
         :
-          <a href='/login'>Login</a>
+          <button onClick={loginWithRedirect}>Log In</button>
       }
+
     </div>
   )
 }

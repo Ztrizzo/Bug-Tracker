@@ -6,10 +6,10 @@ function App() {
   console.log(`http://${window.location.host}/api/`)
   return (
     <Auth0Provider
-      domain='dev-hl39tc9t.us.auth0.com'
-      clientId='4NmvGptwu7C6ahkQtIm9rcxTKkF1VqX4'
-      redirectUri={`http://${window.location.host}/auth0callback`}
-      audience={`http://${window.location.host}/api`}
+      domain="dev-hl39tc9t.us.auth0.com"
+      clientId="jI5BNVp39dli2YXURbTERc9J85XQikD0"
+      redirectUri={window.location.origin}
+      audience='http://localhost:8080/api'
       scope='read:current_user update:current_user_metadata'
     >
       <Routes/>

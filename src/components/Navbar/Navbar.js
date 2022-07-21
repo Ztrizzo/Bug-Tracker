@@ -10,7 +10,7 @@ const Navbar = ({isLoggedIn, role}) => {
       <Link to='/allTickets'>All Tickets</Link>
       <Link to='/CreateTicket'>Create New Ticket</Link>
       {
-        role === 'developer' || role === 'manager' ?
+        role === 'Developer' || role === 'manager' ?
           <Link to='/MyTickets'>My Tickets</Link>
           :
           null
