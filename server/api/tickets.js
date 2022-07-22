@@ -25,6 +25,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) =>{
   try{
+    console.log(req.body);
     await Ticket.create({
       title: req.body.formInfo.title,
       description: req.body.formInfo.description,
