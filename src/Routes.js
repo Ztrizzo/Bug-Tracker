@@ -28,19 +28,16 @@ const ClientRoutes = () => {
           scope: "read:current_user",
         });
   
-        const userDetailsByIdUrl = `http://${domain}/me?name=${user.name}`;
+        const userDetailsByIdUrl = `http://${domain}/me?name=${user?.name}`;
   
-        const metadataResponse = await fetch(userDetailsByIdUrl, {
+        await fetch(userDetailsByIdUrl, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
         });
   
-        const message = await metadataResponse.json();
-  
-        console.log(message);
       } catch (e) {
-        console.log(e.message);
+        console.log(e);
       }
 
     }
