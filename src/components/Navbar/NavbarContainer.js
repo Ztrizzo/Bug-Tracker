@@ -8,7 +8,7 @@ export default function NavbarContainer(){
   let role;
 
   if(!isLoading){
-    role = user[`http://localhost:8080/roles`][0];
+    role = user ? user[`http://localhost:8080/roles`][0] : undefined;
   }
 
   return(

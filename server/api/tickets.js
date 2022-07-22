@@ -1,6 +1,6 @@
 const router = require('express').Router();
 module.exports = router;
-const { models: { Ticket }} = require('../db');
+const { models: { Ticket, User }} = require('../db');
 
 router.get('/', async(req, res, next) => {
   try{
@@ -13,8 +13,25 @@ router.get('/', async(req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try{
-    console.log(req.params.id);
-    res.send(await Ticket.findByPk(req.params.id));
+
+    const ticket = (await Ticket.findByPk(req.params.id)).dataValues;
+    const user = await User.findByPk(ticket.createdBy);
+    res.send({...ticket, createdBy: user.name});
+  }
+  catch(error){
+    next(error);
+  }
+})
+
+router.post('/', async (req, res, next) =>{
+  try{
+    await Ticket.create({
+      title: req.body.formInfo.title,
+      description: req.body.formInfo.description,
+      createdBy: req.body.createdById
+    })
+
+    res.status(201).send();
   }
   catch(error){
     next(error);
