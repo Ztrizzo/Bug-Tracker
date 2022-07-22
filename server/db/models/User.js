@@ -16,9 +16,9 @@ const User = db.define('user', {
 })
 
 //Returns user if it already exists, otherwise returns a new user
-User.findOrCreate = async (sub) =>{
+User.findOrCreate = async ({sub, name}) =>{
   const user = (await User.findByPk(sub))?.dataValues;
-  return user ? user : (await User.create({id: sub})).dataValues;
+  return user ? user : (await User.create({id: sub, name: name})).dataValues;
 }
 
 module.exports = User

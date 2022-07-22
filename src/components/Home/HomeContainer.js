@@ -6,7 +6,7 @@ import axios from "axios";
 
 export default function HomeContainer(){
   const {isAuthenticated, user, isLoading} = useAuth0()
-  console.log(useAuth0());
+
 
   //TESTING
   // const {getAccessTokenSilently} = useAuth0();
@@ -42,7 +42,6 @@ export default function HomeContainer(){
 
 
   //END TESTING
-  console.log(user);
   if(isLoading) return null;
   return(<Home isLoggedIn={isAuthenticated} name={user?.name}/>)
 }
