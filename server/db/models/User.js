@@ -9,12 +9,14 @@ const User = db.define('user', {
   role:{
     type: Sequelize.ENUM('developer', 'manager', 'employee'),
     defaultValue: 'employee'
+  },
+  name: {
+    type: Sequelize.STRING
   }
 })
 
 //Returns user if it already exists, otherwise returns a new user
 User.findOrCreate = async (sub) =>{
-
   const user = (await User.findByPk(sub))?.dataValues;
   return user ? user : (await User.create({id: sub})).dataValues;
 }
