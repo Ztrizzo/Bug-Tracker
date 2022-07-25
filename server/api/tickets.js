@@ -1,6 +1,7 @@
 const router = require('express').Router();
 module.exports = router;
 const { models: { Ticket, User }} = require('../db');
+const jwtCheck = require('../jwtCheck')
 
 router.get('/', async(req, res, next) => {
   try{
@@ -25,7 +26,6 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) =>{
   try{
-    console.log(req.body);
     await Ticket.create({
       title: req.body.formInfo.title,
       description: req.body.formInfo.description,
@@ -38,3 +38,4 @@ router.post('/', async (req, res, next) =>{
     next(error);
   }
 })
+

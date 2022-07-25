@@ -21,5 +21,14 @@ User.findOrCreate = async ({sub, name}) =>{
   return user ? user : (await User.create({id: sub, name: name})).dataValues;
 }
 
+User.prototype.findAllTickets = async function(){
+  const tickets = await db.models.ticket.findAll({
+    where:{
+      userId: this.id
+    }
+  })
+  return tickets;
+}
+
 module.exports = User
 
