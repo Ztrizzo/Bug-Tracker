@@ -39,3 +39,15 @@ router.post('/', async (req, res, next) =>{
   }
 })
 
+router.put('/assign', jwtCheck, async (req, res ,next) => {
+  try{
+    const ticket = await Ticket.findByPk(req.body.ticketId);
+    ticket.userId = req.body.userId;
+    await ticket.save();
+    res.status(204).send();
+  }
+  catch(error){
+    next(error);
+  }
+})
+

@@ -6,12 +6,10 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 export default function TicketContainer(){
   const { ticketId } = useParams();
-  const {user, isLoading} = useAuth0();
+  const {user, isLoading, getAccessTokenSilently} = useAuth0();
   const [ticket, setTicket] = useState({});
   const [developers, setDevelopers] = useState([]);
-  const [assignedDeveloper, setAssignedDeveloper] = useState(
-    developers.find( dev => dev.user_id === ticket.userId)?.user_id || 'unassigned'
-  )
+  const [assignedDeveloper, setAssignedDeveloper] = useState('unassigned')
   let role;
 
   useEffect(() => {
@@ -28,6 +26,11 @@ export default function TicketContainer(){
     loadDevelopers();
   }, [])
 
+  useEffect(() => {
+    //find developer assigned to ticket and set as default
+    setAssignedDeveloper(developers.find( dev => dev.user_id === ticket.userId)?.user_id || 'unassigned')
+  }, [developers, ticket.userId])
+
   if(!isLoading){
     role = user ? user[`http://localhost:8080/roles`][0] : undefined;
   }
@@ -35,9 +38,32 @@ export default function TicketContainer(){
   const assignDeveloper = (evt) => {
     setAssignedDeveloper(evt.target.value);
   }
+
+  const onSubmit = async (evt) => {
+    evt.preventDefault();
+    const accessToken = await getAccessTokenSilently({
+      audience: `http://localhost:8080/api`,
+      scope: "read:current_user",
+    });
+
+    await axios.put('/api/tickets/assign', {
+      ticketId: ticketId,
+      userId: assignedDeveloper
+    },{
+      headers:{
+        authorization: `Bearer ${accessToken}`
+      }
+    })
+  }
  
   
   return(
-    <Ticket ticket={ticket} role={role} developers={developers} assignedDeveloper={assignedDeveloper} assignDeveloper={assignDeveloper}/>
+    <Ticket 
+      ticket={ticket} 
+      role={role} 
+      developers={developers} 
+      assignedDeveloper={assignedDeveloper} 
+      assignDeveloper={assignDeveloper}
+      onSubmit={onSubmit}/>
   )
 }
