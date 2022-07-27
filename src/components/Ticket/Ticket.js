@@ -1,6 +1,7 @@
 import React from "react";
 
-export default function Ticket({ ticket, role, developers, assignedDeveloper, assignDeveloper }){
+export default function Ticket({ ticket, role, developers, assignedDeveloper, assignDeveloper, onSubmit }){
+  // console.log(assignedDeveloper);
   return(
     <div>
       <h3>{ticket.title}</h3>
@@ -8,7 +9,7 @@ export default function Ticket({ ticket, role, developers, assignedDeveloper, as
       <h4>created by: {ticket.createdBy}</h4>
       <h4>assigned to: 
         {role === 'Manager' ? 
-          <form>
+          <form onSubmit={onSubmit}>
             <select
               value={assignedDeveloper}
               onChange={assignDeveloper}
