@@ -7,10 +7,12 @@ import { useAuth0 } from "@auth0/auth0-react";
 export default function TicketContainer(){
   const { ticketId } = useParams();
   const {user, isLoading} = useAuth0();
-  const [ticket, setTicket] = useState({})
+  const [ticket, setTicket] = useState({});
+  const [developers, setDevelopers] = useState([]);
+  const [assignedDeveloper, setAssignedDeveloper] = useState(
+    developers.find( dev => dev.user_id === ticket.userId)?.user_id || 'unassigned'
+  )
   let role;
-
-
 
   useEffect(() => {
     const loadTicket = async () => {
@@ -19,12 +21,23 @@ export default function TicketContainer(){
     loadTicket();
   }, [])
 
+  useEffect(() => {
+    const loadDevelopers = async () => {
+      setDevelopers((await axios.get('/api/developers')).data);
+    }
+    loadDevelopers();
+  }, [])
+
   if(!isLoading){
     role = user ? user[`http://localhost:8080/roles`][0] : undefined;
+  }
+
+  const assignDeveloper = (evt) => {
+    setAssignedDeveloper(evt.target.value);
   }
  
   
   return(
-    <Ticket ticket={ticket} role={role}/>
+    <Ticket ticket={ticket} role={role} developers={developers} assignedDeveloper={assignedDeveloper} assignDeveloper={assignDeveloper}/>
   )
 }
