@@ -10,7 +10,7 @@ export default function MyTickets({ tickets, user }){
       {tickets.map(ticket => {
         return(
           <div key={ticket.id}>
-            <Link to={`/api/tickets/${ticket.id}`}>{ticket.title}</Link>
+            <Link to={`/tickets/${ticket.id}`}>{ticket.title}</Link>
           </div>
 
         )

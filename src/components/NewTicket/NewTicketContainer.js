@@ -8,6 +8,7 @@ export default function NewTicketContainer(){
   const [formInfo, setFormInfo] = useState({
     title: '',
     description: '',
+    priority: 1
   });
 
   const handleChange = (evt) => {

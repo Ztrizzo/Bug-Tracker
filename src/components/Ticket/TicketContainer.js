@@ -28,7 +28,7 @@ export default function TicketContainer(){
 
   useEffect(() => {
     //find developer assigned to ticket and set as default
-    setAssignedDeveloper(developers.find( dev => dev.user_id === ticket.userId)?.user_id || 'unassigned')
+    setAssignedDeveloper(developers.find( dev => dev.user_id === ticket.userId) || {user_id: 'unassigned'})
   }, [developers, ticket.userId])
 
   if(!isLoading){

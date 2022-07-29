@@ -41,9 +41,12 @@ const ClientRoutes = () => {
       }
 
     }
-    getSecrets();
+    if(!isLoading){
+      getSecrets();
+    }
 
-  }, [userId, getAccessTokenSilently])
+
+  }, [userId, getAccessTokenSilently, user?.name])
 
   return (
     <>

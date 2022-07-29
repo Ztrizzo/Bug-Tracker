@@ -11,6 +11,10 @@ const Ticket = db.define('ticket', {
   },
   createdBy: {
     type: Sequelize.STRING
+  },
+  priority: {
+    type: Sequelize.INTEGER,
+    defaultValue: 1
   }
 
 })

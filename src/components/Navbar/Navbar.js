@@ -8,12 +8,18 @@ const Navbar = ({isLoggedIn, role}) => {
       <Link to='/'>Home</Link>
       <Link to='/auth'>{isLoggedIn ? "Sign Out" : "Sign in"}</Link>
       <Link to='/allTickets'>All Tickets</Link>
-      <Link to='/CreateTicket'>Create New Ticket</Link>
+      {
+        isLoggedIn ? 
+          <Link to='/CreateTicket'>Create New Ticket</Link>
+        :
+          null
+      }
+      
       {
         role === 'Developer' || role === 'manager' ?
-          <Link to='/MyTickets'>My Tickets</Link>
+            <Link to='/MyTickets'>My Tickets</Link>
           :
-          null
+            null
       }
 
     </nav>
