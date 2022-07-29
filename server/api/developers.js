@@ -10,26 +10,14 @@ router.get('/', async (req, res, next) =>{
     const token = await getManagementAPIToken();
     const options = { 
       method: "GET",
-      url: "https://dev-hl39tc9t.us.auth0.com/api/v2/users",
+      url: "https://dev-hl39tc9t.us.auth0.com/api/v2/roles/rol_q9CGIQ0OVjoWPOF1/users",
       headers: { "authorization": `Bearer ${token}` },
     };
 
-    //request all users
+    //request all users with the developer role
     axios(options)
     .then(async response => {
-      const  users = response.data;
-      let developers = [];
-
-      //another api request for each user to get the role.
-      for(let user of users){
-        const roles = (await axios({...options, url: `https://dev-hl39tc9t.us.auth0.com/api/v2/users/${user.user_id}/roles`})).data;
-
-        //if users have role 'developer' add to array
-        if(roles.find(role => role.name === 'Developer')){
-          developers.push(user);
-        }
-      }
-      res.status(200).send(developers);
+      res.status(200).send(response.data);
     })
     
   }
