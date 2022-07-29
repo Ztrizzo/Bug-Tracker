@@ -29,7 +29,8 @@ router.post('/', async (req, res, next) =>{
     await Ticket.create({
       title: req.body.formInfo.title,
       description: req.body.formInfo.description,
-      createdBy: req.body.createdById
+      createdBy: req.body.createdById,
+      priority: req.body.formInfo.priority
     })
 
     res.status(201).send();
