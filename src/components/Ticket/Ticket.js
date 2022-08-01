@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function Ticket({ ticket, role, developers, assignedDeveloper, assignDeveloper, onSubmit }){
-  console.log(assignedDeveloper);
   return(
     <div>
       <h3>{ticket.title}</h3>
