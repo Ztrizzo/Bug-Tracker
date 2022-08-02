@@ -51,18 +51,21 @@ const ClientRoutes = () => {
   return (
     <>
       <Navbar/>
-      <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='auth' element={<AuthForm/>}/>
-        <Route path='alltickets' element={<AllTickets/>}/>
-        <Route path='CreateTicket' element={<NewTicket/>}/>
-        <Route path='tickets'>
-          <Route path=':ticketId' element={<Ticket/>}/>
-        </Route>
-        <Route path='MyTickets' element={<MyTickets/>}/>
-        <Route path='*' element={<Home/>}></Route>
-        
-      </Routes>
+      <div style={{paddingTop: '75px', paddingLeft: '75px'}}>
+        <Routes>
+          <Route path='/' element={<Home/>}/>
+          <Route path='auth' element={<AuthForm/>}/>
+          <Route path='alltickets' element={<AllTickets/>}/>
+          <Route path='CreateTicket' element={<NewTicket/>}/>
+          <Route path='tickets'>
+            <Route path=':ticketId' element={<Ticket/>}/>
+          </Route>
+          <Route path='MyTickets' element={<MyTickets/>}/>
+          <Route path='*' element={<Home/>}></Route>
+          
+        </Routes>
+      </div>
+
     </>
 
   )
