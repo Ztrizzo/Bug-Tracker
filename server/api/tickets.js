@@ -5,7 +5,8 @@ const jwtCheck = require('../jwtCheck')
 
 router.get('/', async(req, res, next) => {
   try{
-    res.send(await Ticket.findAll());
+    const tickets = await Ticket.findAll({include: [User]});
+    res.send(tickets);
   }
   catch(error){
     next(error);
