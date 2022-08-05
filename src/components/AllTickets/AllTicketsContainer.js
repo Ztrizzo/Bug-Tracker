@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function AllTicketsContainer(){
   const [allTickets, setAllTickets] = useState([]);
-  const navigate = useNavigate();
+
 
   useEffect(() => {
     axios.get('/api/tickets')
@@ -14,11 +14,8 @@ export default function AllTicketsContainer(){
     )
   }, [])
 
-  const handleOnCellClick = ({ id }) =>{
-    navigate(`/tickets/${id}`);
-  }
   
   return(
-    <AllTickets allTickets={allTickets} handleOnCellClick={handleOnCellClick}/>
+    <AllTickets allTickets={allTickets}/>
   )
 }

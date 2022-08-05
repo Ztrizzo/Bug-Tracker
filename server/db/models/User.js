@@ -25,7 +25,8 @@ User.prototype.findAllTickets = async function(){
   const tickets = await db.models.ticket.findAll({
     where:{
       userId: this.id
-    }
+    },
+    include:[User]
   })
   return tickets;
 }

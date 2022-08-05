@@ -2,6 +2,7 @@ import * as React from "react";
 import { DataGrid } from '@mui/x-data-grid';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
+import { useNavigate } from "react-router-dom";
 TimeAgo.addDefaultLocale(en);
 const timeAgo = new TimeAgo('en-US');
 
@@ -14,7 +15,13 @@ const columns = [
 
 
 
-export default function AllTickets({ allTickets, handleOnCellClick }){
+export default function AllTickets({ allTickets }){
+  const navigate = useNavigate();
+  const handleOnCellClick = ({ id }) =>{
+    navigate(`/tickets/${id}`);
+  }
+  
+  
   allTickets = allTickets.map(ticket => {
     return{
       ...ticket,
