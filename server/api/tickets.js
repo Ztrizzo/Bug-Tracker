@@ -15,10 +15,34 @@ router.get('/', async(req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try{
-
-    const ticket = (await Ticket.findByPk(req.params.id)).dataValues;
+    const ticket = (await Ticket.findOne({
+      where:{ id: req.params.id },
+      include: [User]
+    }))?.dataValues;
+    if(!ticket){
+      res.status(404).send();
+    }
     const user = await User.findByPk(ticket.createdBy);
+
     res.send({...ticket, createdBy: user.name});
+  }
+  catch(error){
+    next(error);
+  }
+})
+
+
+
+router.delete('/:id', jwtCheck, async (req, res, next) => {
+  try{
+    //Only managers can delete tickets
+    if(!req.auth.permissions.includes('delete:tickets')){
+      res.status(401).send();
+      return;
+    }
+    const ticket = await Ticket.findByPk(req.params.id);
+    await ticket.destroy();
+    res.status(204).send();
   }
   catch(error){
     next(error);

@@ -1,6 +1,14 @@
 import React from "react";
 
-export default function Ticket({ ticket, role, developers, assignedDeveloper, assignDeveloper, onSubmit }){
+export default function Ticket({ 
+  ticket,
+  role, 
+  developers, 
+  assignedDeveloper, 
+  assignDeveloper, 
+  onSubmit,
+  handleDelete
+ }){
   return(
     <div>
       <h3>{ticket.title}</h3>
@@ -26,7 +34,11 @@ export default function Ticket({ ticket, role, developers, assignedDeveloper, as
           <span>{assignedDeveloper.name ? assignedDeveloper.name : 'Unassigned'}</span>
         }
       </h4>
-      
+      {role === 'Manager' ? 
+        <button onClick={handleDelete}>Delete</button>
+      :
+        null
+      }
       
     </div>
   )
