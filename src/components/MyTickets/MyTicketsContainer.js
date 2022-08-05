@@ -24,7 +24,6 @@ export default function MyTicketsContainer(){
       } catch (e) {
         console.log(e);
       }
-
     }
     getSecrets();
 

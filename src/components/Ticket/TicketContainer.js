@@ -28,7 +28,7 @@ export default function TicketContainer(){
 
   useEffect(() => {
     //find developer assigned to ticket and set as default
-    setAssignedDeveloper(developers.find( dev => dev.user_id === ticket.userId) || {user_id: 'unassigned'})
+    setAssignedDeveloper(ticket?.user || 'unassigned')
   }, [developers, ticket.userId])
 
   if(!isLoading){
@@ -55,8 +55,28 @@ export default function TicketContainer(){
       }
     })
   }
- 
-  
+
+
+
+  const handleDelete = async () => {
+    try {
+      const accessToken = await getAccessTokenSilently();
+      await axios.delete(`/api/tickets/${ticketId}`, {
+        headers:{
+          Authorization: `Bearer ${accessToken}`
+        }
+      });
+    } catch (e) {
+      console.log(e);
+    }
+}
+
+
+
+
+
+
+
   return(
     <Ticket 
       ticket={ticket} 
@@ -64,6 +84,7 @@ export default function TicketContainer(){
       developers={developers} 
       assignedDeveloper={assignedDeveloper} 
       assignDeveloper={assignDeveloper}
-      onSubmit={onSubmit}/>
+      onSubmit={onSubmit}
+      handleDelete={handleDelete}/>
   )
 }
