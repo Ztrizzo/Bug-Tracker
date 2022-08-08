@@ -2,7 +2,7 @@ import React from "react";
 import { Doughnut } from "react-chartjs-2";
 
 export default function DeveloperGraph({ allTickets }){
-  console.log(allTickets);
+
   const ticketsPerDeveloper = allTickets.reduce((accum, ticket) => {
     if(!ticket.user)
       accum['Unassigned'] += 1;
@@ -14,7 +14,6 @@ export default function DeveloperGraph({ allTickets }){
     }
     return accum;
   }, {'Unassigned': 0})
-  console.log(Object.keys(ticketsPerDeveloper), Object.values(ticketsPerDeveloper));
   
   const data = {
     labels: Object.keys(ticketsPerDeveloper),
