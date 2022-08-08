@@ -3,6 +3,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import DoughnutGraph from './PriorityGraph';
 import DeveloperGraph from './DeveloperGraph';
+import AgeGraph from './AgeGraph';
 /**
  * COMPONENT
  */
@@ -14,6 +15,7 @@ export default function Home({ isLoggedIn, name, allTickets }){
       {isLoggedIn ? <h3>{`Welcome, ${name}`}</h3> : null}
       <DoughnutGraph allTickets={allTickets}/>
       <DeveloperGraph allTickets={allTickets}/>
+      <AgeGraph allTickets={allTickets}/>
     </div>
   )
 }
