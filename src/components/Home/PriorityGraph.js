@@ -1,7 +1,7 @@
 import React from "react";
 import { Doughnut } from 'react-chartjs-2';
 import 'chart.js/auto';
-export default function DoughnutGraph({ allTickets }){
+export default function PriorityGraph({ allTickets }){
 
   const data = {
     labels: [
@@ -12,7 +12,7 @@ export default function DoughnutGraph({ allTickets }){
       '*****'
     ],
     datasets:[{
-      label: 'tickets',
+      label: 'Ticket Priority',
       data: Object.values(allTickets.reduce((accum, ticket) => {
         if(ticket.priority in accum){
           accum[ticket.priority]++;
@@ -34,7 +34,7 @@ export default function DoughnutGraph({ allTickets }){
   }
   return (
     <div>
-      <h1>GRAPH</h1>
+      <h1>Ticket Priority</h1>
       <Doughnut data={data}/>
     </div>
 
