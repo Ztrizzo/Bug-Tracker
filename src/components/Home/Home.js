@@ -13,11 +13,16 @@ export default function Home({ isLoggedIn, name, allTickets }){
   return (
     <div>
       {isLoggedIn ? <h3>{`Welcome, ${name}`}</h3> : null}
-      <div style={{display: 'flex', flexWrap:'wrap', flexDirection:'row'}}>
-          <DoughnutGraph style={{flexBasis:'50%', flexGrow:1}} allTickets={allTickets}/>
-          <DeveloperGraph style={{flexBasis:'50%', flexGrow:1}} allTickets={allTickets}/>
-          <AgeGraph style={{flexBasis:'50%', flexGrow:1}} allTickets={allTickets}/>
-          <NumTickets style={{flexBasis:'50%', flexGrow:1}} allTickets={allTickets}/>
+      <div style={{display: 'flex', flexDirection:'column'}}>
+        <div style={{display: 'flex', width: '100%', justifyContent:'space-around'}}>
+          <DoughnutGraph allTickets={allTickets}/>
+          <DeveloperGraph  allTickets={allTickets}/>
+        </div>
+        <div style={{display: 'flex', width: '100%', justifyContent:'space-around'}}>
+          <AgeGraph allTickets={allTickets}/>
+          <NumTickets allTickets={allTickets}/>
+        </div>
+
       </div>
 
 

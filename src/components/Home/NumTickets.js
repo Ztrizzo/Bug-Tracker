@@ -5,8 +5,8 @@ export default function NumTickets({ allTickets }){
   
   return(
     <div>
-      <h1>Total Number of Tickets</h1>
-      <h2>{numberOfTickets}</h2>
+      <h1 style={{textAlign: 'center'}}>Total Number of Tickets</h1>
+      <h2 style={{textAlign: 'center'}}>{numberOfTickets}</h2>
     </div>
   )
 }
