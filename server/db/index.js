@@ -6,7 +6,7 @@ const User = require('./models/User')
 const Comment = require('./models/Comment');
 const Ticket = require('./models/Ticket');
 
-//associations could go here!
+//associations
 User.hasMany(Ticket);
 Ticket.belongsTo(User);
 
