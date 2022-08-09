@@ -41,7 +41,11 @@ async function seed() {
   //Creating comments
   const comments = [];
   for(let i = 0; i < 30; i++){
-    comments.push(await Comment.create({content: faker.lorem.paragraph()}))
+    comments.push(await Comment.create({
+      content: faker.lorem.paragraph(), 
+      userId: users[Math.floor(Math.random() * users.length)].id,
+      ticketId: tickets[Math.floor(Math.random() * tickets.length)].id
+    }))
   }
 
 }

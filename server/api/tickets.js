@@ -1,6 +1,6 @@
 const router = require('express').Router();
 module.exports = router;
-const { models: { Ticket, User }} = require('../db');
+const { models: { Ticket, User, Comment }} = require('../db');
 const jwtCheck = require('../jwtCheck')
 
 router.get('/', async(req, res, next) => {
@@ -17,7 +17,12 @@ router.get('/:id', async (req, res, next) => {
   try{
     const ticket = (await Ticket.findOne({
       where:{ id: req.params.id },
-      include: [User]
+      include: [{
+        model: User
+      }, {
+        model: Comment,
+        include: [User]
+      }]
     }))?.dataValues;
     if(!ticket){
       res.status(404).send();

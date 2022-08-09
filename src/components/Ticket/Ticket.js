@@ -1,4 +1,5 @@
 import React from "react";
+import Comments from "../Comments";
 
 export default function Ticket({ 
   ticket,
@@ -39,7 +40,7 @@ export default function Ticket({
       :
         null
       }
-      
+      <Comments comments={ticket.comments}/>
     </div>
   )
 }

@@ -38,7 +38,7 @@ export default function AllTickets({ allTickets }){
         rows={allTickets}
         columns={columns}
         pageSize={10}
-        rowsPerPageOptions={[5]}
+        rowsPerPageOptions={[10]}
         onCellClick={handleOnCellClick}
       />
     </div>

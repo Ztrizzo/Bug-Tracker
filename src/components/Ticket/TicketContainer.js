@@ -69,13 +69,7 @@ export default function TicketContainer(){
     } catch (e) {
       console.log(e);
     }
-}
-
-
-
-
-
-
+  }
 
   return(
     <Ticket 
