@@ -2,7 +2,7 @@ import React from "react";
 import { Bar } from "react-chartjs-2";
 
 export default function AgeGraph({ allTickets }){
-  
+
   const ticketAges = allTickets.reduce((accum, ticket) => {
     const numDaysSinceCreation = (new Date() - new Date(ticket.createdAt)) / 1000 / 60 / 60 / 24;
     if(numDaysSinceCreation < 1)
@@ -14,11 +14,11 @@ export default function AgeGraph({ allTickets }){
     else if(numDaysSinceCreation < 90)
       accum['Less than 3 Months']++;
     else
-      accum['Greater than 1 Year']++;
+      accum['Greater than 3 Months']++;
 
     return accum;
   }, {
-    'Greater than 1 Year': 0,
+    'Greater than 3 Months': 0,
     'Less than 3 Months': 0,
     'Less than 1 Month': 0,
     'Less than 1 Week': 0,

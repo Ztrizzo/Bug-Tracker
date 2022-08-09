@@ -17,6 +17,11 @@ async function seed() {
     users.push(await User.create({id: faker.name.firstName(), name: faker.name.firstName(), role:'developer'}))
   }
 
+  //generates a random date between the start time and end time.
+  function randomDate(start, end) {
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+  }
+  
 
   //Creating tickets
   const tickets = [];
@@ -26,7 +31,9 @@ async function seed() {
         title: faker.lorem.lines(1), 
         description: faker.lorem.paragraph(), 
         createdBy: users[Math.floor(Math.random() * users.length)].id,
-        userId: users[Math.floor(Math.random() * users.length)].id
+        userId: users[Math.floor(Math.random() * users.length)].id,
+        priority: Math.ceil(Math.random() * 5),
+        createdAt: randomDate(new Date(2022, 4), new Date())
       }))
 
   }
