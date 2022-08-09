@@ -10,10 +10,12 @@ const columns = [
   {field: 'priority', headerName: 'Priority', width: 110},
   {field: 'title', headerName: 'Title', width: 500},
   {field: 'assignedTo', headerName: 'Assigned To'},
-  {field: 'posted', headerName: 'Posted', width: 100}
+  {field: 'posted', headerName: 'Posted', width: 100, renderCell: (params) => {
+    return(
+      <div>{timeAgo.format(params.formattedValue)}</div>
+    )
+  }}
 ]
-
-
 
 export default function AllTickets({ allTickets }){
   const navigate = useNavigate();
@@ -27,7 +29,7 @@ export default function AllTickets({ allTickets }){
       ...ticket,
       assignedTo: ticket.user?.name || 'unassigned',
       priority: Array(ticket.priority).fill('★').join(''),
-      posted: timeAgo.format(Date.now() - (Date.now() - new Date(ticket.createdAt)))
+      posted: Date.now() - (Date.now() - new Date(ticket.createdAt)) //milliseconds since created
     }
   })
   return (
