@@ -1,6 +1,9 @@
 const router = require('express').Router()
 module.exports = router
 
+//websocket server for comments
+require('./comments');
+
 router.use('/tickets', require('./tickets'));
 router.use('/users', require('./users'));
 router.use('/myTickets', require('./myTickets'));
