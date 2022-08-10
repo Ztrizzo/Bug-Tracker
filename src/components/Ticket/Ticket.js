@@ -8,7 +8,8 @@ export default function Ticket({
   assignedDeveloper, 
   assignDeveloper, 
   onSubmit,
-  handleDelete
+  handleDelete,
+  loadTicket
  }){
   return(
     <div>
@@ -40,7 +41,7 @@ export default function Ticket({
       :
         null
       }
-      <Comments comments={ticket.comments}/>
+      <Comments comments={ticket.comments} ticketId={ticket.id} loadTicket={loadTicket}/>
     </div>
   )
 }

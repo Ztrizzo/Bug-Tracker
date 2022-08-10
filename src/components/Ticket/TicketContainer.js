@@ -12,10 +12,10 @@ export default function TicketContainer(){
   const [assignedDeveloper, setAssignedDeveloper] = useState('unassigned')
   let role;
 
+  const loadTicket = async () => {
+    setTicket((await axios.get(`/api/tickets/${ticketId}`)).data);
+  };
   useEffect(() => {
-    const loadTicket = async () => {
-      setTicket((await axios.get(`/api/tickets/${ticketId}`)).data);
-    }
     loadTicket();
   }, [])
 
@@ -79,6 +79,7 @@ export default function TicketContainer(){
       assignedDeveloper={assignedDeveloper} 
       assignDeveloper={assignDeveloper}
       onSubmit={onSubmit}
-      handleDelete={handleDelete}/>
+      handleDelete={handleDelete}
+      loadTicket={loadTicket}/>
   )
 }

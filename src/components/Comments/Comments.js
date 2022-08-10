@@ -21,7 +21,7 @@ export default function Comments({ comments, handleChange, handleSubmit, comment
         style={{display:'flex', flexDirection:'column', marginTop: '5em'}}
         onSubmit={handleSubmit}
         >
-        
+        {/*shouldn't show this if not logged in  */}
         <Typography variant="h6">New Comment</Typography>
         <TextareaAutosize
           value={commentText}
@@ -31,7 +31,7 @@ export default function Comments({ comments, handleChange, handleSubmit, comment
           placeholder="New Comment"
           style={{ width: '100%' }}
         />
-        <Button>Submit</Button>
+        <Button type="submit">Submit</Button>
       </form>
         
     </div>
