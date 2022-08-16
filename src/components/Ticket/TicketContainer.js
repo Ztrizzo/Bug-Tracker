@@ -33,10 +33,6 @@ export default function TicketContainer(){
     loadDevelopers();
   }, [])
 
-  // useEffect(() => {
-  //   //find developer assigned to ticket and set as default
-  //   setAssignedDeveloper(ticket?.user || 'unassigned')
-  // }, [developers, ticket.userId])
 
   if(!isLoading){
     role = user ? user[`http://localhost:8080/roles`][0] : undefined;
