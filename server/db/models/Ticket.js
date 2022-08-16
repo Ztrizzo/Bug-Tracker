@@ -15,6 +15,14 @@ const Ticket = db.define('ticket', {
   priority: {
     type: Sequelize.INTEGER,
     defaultValue: 1
+  },
+  completed: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
+  completedOn: {
+    type: Sequelize.DATE,
+    defaultValue: null
   }
 
 })

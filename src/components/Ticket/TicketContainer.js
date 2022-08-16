@@ -71,6 +71,24 @@ export default function TicketContainer(){
     }
   }
 
+
+
+  const completeTicket = async () => {
+    try {
+      const accessToken = await getAccessTokenSilently();
+
+      await axios.put(`/api/tickets/${ticketId}/complete`, null, {
+        headers:{
+          Authorization: `Bearer ${accessToken}`
+        }
+      });
+      loadTicket();
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+
   return(
     <Ticket 
       ticket={ticket} 
@@ -80,6 +98,7 @@ export default function TicketContainer(){
       assignDeveloper={assignDeveloper}
       onSubmit={onSubmit}
       handleDelete={handleDelete}
-      loadTicket={loadTicket}/>
+      loadTicket={loadTicket}
+      completeTicket={completeTicket}/>
   )
 }

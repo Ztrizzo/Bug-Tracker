@@ -6,12 +6,7 @@ import { BrowserRouter as Router} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 import { CssBaseline } from '@mui/material';
-import { io } from 'socket.io-client';
 
-const socket = io('http://localhost:3000');
-socket.on('connect', () => {
-  console.log(`you connected with id: ${socket.id}`)
-})
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
