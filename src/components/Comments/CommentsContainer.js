@@ -15,7 +15,6 @@ export default function CommentsContainer({ comments, ticketId, loadTicket }){
 
 
   socket.on('update-comments', (comment) => {
-    //This probably doesn't work
     loadTicket();
   })
 
@@ -24,6 +23,7 @@ export default function CommentsContainer({ comments, ticketId, loadTicket }){
     evt.preventDefault();
     console.log('emit');
     socket.emit('new-comment', {ticketId: ticketId, creatingUser: user.sub, content: commentText})
+    setCommentText('');
   }
   
   const handleChange = (evt) => {
