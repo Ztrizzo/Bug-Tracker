@@ -79,14 +79,14 @@ router.put('/:id/complete', jwtCheck, async (req, res, next) => {
 
 router.post('/', async (req, res, next) =>{
   try{
-    await Ticket.create({
+    const ticket = await Ticket.create({
       title: req.body.formInfo.title,
       description: req.body.formInfo.description,
       createdBy: req.body.createdById,
       priority: req.body.formInfo.priority
     })
 
-    res.status(201).send();
+    res.status(201).send(ticket);
   }
   catch(error){
     next(error);

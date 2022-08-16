@@ -1,7 +1,7 @@
 import Ticket from './Ticket';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function TicketContainer(){
@@ -9,12 +9,18 @@ export default function TicketContainer(){
   const {user, isLoading, getAccessTokenSilently} = useAuth0();
   const [ticket, setTicket] = useState({});
   const [developers, setDevelopers] = useState([]);
-  const [assignedDeveloper, setAssignedDeveloper] = useState('unassigned')
+  const [assignedDeveloper, setAssignedDeveloper] = useState('unassigned');
+  const navigate = useNavigate();
   let role;
 
   const loadTicket = async () => {
-    setTicket((await axios.get(`/api/tickets/${ticketId}`)).data);
+    const newTicket = (await axios.get(`/api/tickets/${ticketId}`)).data;
+    setTicket(newTicket);
+    setAssignedDeveloper(newTicket.userId || 'unassigned');
   };
+
+
+
   useEffect(() => {
     loadTicket();
   }, [])
@@ -22,14 +28,15 @@ export default function TicketContainer(){
   useEffect(() => {
     const loadDevelopers = async () => {
       setDevelopers((await axios.get('/api/developers')).data);
+
     }
     loadDevelopers();
   }, [])
 
-  useEffect(() => {
-    //find developer assigned to ticket and set as default
-    setAssignedDeveloper(ticket?.user || 'unassigned')
-  }, [developers, ticket.userId])
+  // useEffect(() => {
+  //   //find developer assigned to ticket and set as default
+  //   setAssignedDeveloper(ticket?.user || 'unassigned')
+  // }, [developers, ticket.userId])
 
   if(!isLoading){
     role = user ? user[`http://localhost:8080/roles`][0] : undefined;
@@ -66,6 +73,7 @@ export default function TicketContainer(){
           Authorization: `Bearer ${accessToken}`
         }
       });
+      navigate('/allTickets');
     } catch (e) {
       console.log(e);
     }
