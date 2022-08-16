@@ -5,7 +5,12 @@ const jwtCheck = require('../jwtCheck')
 
 router.get('/', async(req, res, next) => {
   try{
-    const tickets = await Ticket.findAll({include: [User]});
+    const tickets = await Ticket.findAll({
+      where: {
+        completed: false
+      },
+      include: [User]
+    });
     res.send(tickets);
   }
   catch(error){
@@ -48,6 +53,24 @@ router.delete('/:id', jwtCheck, async (req, res, next) => {
     const ticket = await Ticket.findByPk(req.params.id);
     await ticket.destroy();
     res.status(204).send();
+  }
+  catch(error){
+    next(error);
+  }
+})
+
+router.put('/:id/complete', jwtCheck, async (req, res, next) => {
+  try{
+    if(!req.auth.permissions.includes('complete:tickets')){
+      res.status(401).send();
+      return;
+    }
+    const ticket = await Ticket.findByPk(req.params.id);
+    ticket.completed = true;
+    ticket.completedOn = new Date();
+    await ticket.save();
+
+    res.status(204).send(ticket);
   }
   catch(error){
     next(error);

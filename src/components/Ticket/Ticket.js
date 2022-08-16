@@ -1,5 +1,7 @@
 import React from "react";
 import Comments from "../Comments";
+import { Button } from "@mui/material";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 export default function Ticket({ 
   ticket,
@@ -9,11 +11,18 @@ export default function Ticket({
   assignDeveloper, 
   onSubmit,
   handleDelete,
-  loadTicket
+  loadTicket,
+  completeTicket
  }){
   return(
     <div>
-      <h3>{ticket.title}</h3>
+      <h3>{ticket.title}
+        {ticket.completed ? 
+          <CheckCircleIcon/>
+        :
+          null
+        }
+      </h3>
       <p>{ticket.description}</p>
       <h4>created by: {ticket.createdBy}</h4>
       <h4>ticket priority: {ticket.priority}</h4>
@@ -29,7 +38,7 @@ export default function Ticket({
                 return <option key={developer.user_id} value={developer.user_id}>{developer.name}</option>
               })}
             </select>
-            <button>Assign</button>
+            <Button type="submit">Assign</Button>
           </form>
           
         :
@@ -37,7 +46,12 @@ export default function Ticket({
         }
       </h4>
       {role === 'Manager' ? 
-        <button onClick={handleDelete}>Delete</button>
+        <Button onClick={handleDelete} sx={{color: 'red'}}>Delete</Button>
+      :
+        null
+      }
+      {role === 'Manager' || role === 'Developer' ? 
+        <Button sx={{color: 'green'}} onClick={completeTicket}>Complete</Button>
       :
         null
       }
