@@ -2,6 +2,7 @@ import React from "react";
 import Comments from "../Comments";
 import { Button } from "@mui/material";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { useTheme } from "@emotion/react";
 
 export default function Ticket({ 
   ticket,
@@ -14,6 +15,8 @@ export default function Ticket({
   loadTicket,
   completeTicket
  }){
+  const theme = useTheme();
+
   return(
     <div>
       <h3>{ticket.title}
@@ -46,12 +49,12 @@ export default function Ticket({
         }
       </h4>
       {role === 'Manager' ? 
-        <Button onClick={handleDelete} sx={{color: 'red'}}>Delete</Button>
+        <Button onClick={handleDelete} sx={{color: theme.palette.warning.main}}>Delete</Button>
       :
         null
       }
       {role === 'Manager' || role === 'Developer' ? 
-        <Button sx={{color: 'green'}} onClick={completeTicket}>Complete</Button>
+        <Button sx={{color: theme.palette.secondary.main}} onClick={completeTicket}>Complete</Button>
       :
         null
       }
