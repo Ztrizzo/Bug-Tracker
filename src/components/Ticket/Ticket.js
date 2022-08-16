@@ -30,7 +30,7 @@ export default function Ticket({
         {role === 'Manager' ? 
           <form onSubmit={onSubmit}>
             <select
-              value={assignedDeveloper.user_id}
+              value={assignedDeveloper}
               onChange={assignDeveloper}
             >
               <option value='unassigned'>Unassigned</option>
@@ -42,7 +42,7 @@ export default function Ticket({
           </form>
           
         :
-          <span>{assignedDeveloper.name ? assignedDeveloper.name : 'Unassigned'}</span>
+          <span>{ticket.user ? ticket.user.name : 'Unassigned'}</span>
         }
       </h4>
       {role === 'Manager' ? 
