@@ -10,6 +10,7 @@ import Ticket from './components/Ticket';
 import MyTickets from './components/MyTickets';
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from 'axios';
+import CompletedTickets from './components/CompletedTickets';
 
 const ClientRoutes = () => {
   const dispatch = useDispatch();
@@ -57,6 +58,7 @@ const ClientRoutes = () => {
           <Route path='auth' element={<AuthForm/>}/>
           <Route path='alltickets' element={<AllTickets/>}/>
           <Route path='CreateTicket' element={<NewTicket/>}/>
+          <Route path='CompletedTickets' element={<CompletedTickets/>}/>
           <Route path='tickets'>
             <Route path=':ticketId' element={<Ticket/>}/>
           </Route>

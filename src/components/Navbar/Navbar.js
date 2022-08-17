@@ -13,6 +13,7 @@ import BugReportIcon from '@mui/icons-material/BugReport';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import NavbarIcon from '../../styledComponents/NavbarIcon/NavbarIcon';
+import HistoryIcon from '@mui/icons-material/History';
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -102,6 +103,10 @@ export default function Navbar({isLoggedIn, role}) {
         :
           null
         }
+        <Divider/>
+        <NavbarIcon to='/completedTickets' open={open} text='Completed Tickets'>
+          <HistoryIcon/>
+        </NavbarIcon>
 
       </Drawer>
     </Box>

@@ -18,6 +18,21 @@ router.get('/', async(req, res, next) => {
   }
 })
 
+router.get('/completed', async (req, res, next) => {
+  try{
+    const completedTickets = await Ticket.findAll({
+      where:{
+        completed: true
+      },
+      include: [User]
+    });
+    res.status(200).send(completedTickets);
+  }
+  catch(error){
+    next(error);
+  }
+})
+
 router.get('/:id', async (req, res, next) => {
   try{
     const ticket = (await Ticket.findOne({
