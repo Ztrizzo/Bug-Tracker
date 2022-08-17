@@ -9,6 +9,7 @@ const TertiaryButton = (props) => {
   const theme = useTheme();
   return(
     <Button
+      {...props}
       variant='text'
       color='error'
     >

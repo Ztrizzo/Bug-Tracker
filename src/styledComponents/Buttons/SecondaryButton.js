@@ -9,8 +9,8 @@ const SecondaryButton = (props) => {
   const theme = useTheme();
   return(
     <Button
+    {...props}
     variant='outlined'
-    // color='success'
     >
       {props.children}
     </Button>

@@ -9,6 +9,7 @@ const PrimaryButton = (props) => {
   const theme = useTheme();
   return(
     <Button
+    {...props}
     variant='contained'
     // color='success'
     >
