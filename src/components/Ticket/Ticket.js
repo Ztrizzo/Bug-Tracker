@@ -3,6 +3,9 @@ import Comments from "../Comments";
 import { Button } from "@mui/material";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useTheme } from "@emotion/react";
+import PrimaryButton from "../../styledComponents/Buttons/PrimaryButton";
+import SecondaryButton from "../../styledComponents/Buttons/SecondaryButton";
+import TertiaryButton from "../../styledComponents/Buttons/TertiaryButton";
 
 export default function Ticket({ 
   ticket,
@@ -41,7 +44,7 @@ export default function Ticket({
                 return <option key={developer.user_id} value={developer.user_id}>{developer.name}</option>
               })}
             </select>
-            <Button type="submit">Assign</Button>
+            <SecondaryButton variant='contained' type="submit">Assign</SecondaryButton>
           </form>
           
         :
@@ -49,12 +52,12 @@ export default function Ticket({
         }
       </h4>
       {role === 'Manager' ? 
-        <Button onClick={handleDelete} sx={{color: theme.palette.warning.main}}>Delete</Button>
+        <TertiaryButton variant='contained' onClick={handleDelete}>Delete</TertiaryButton>
       :
         null
       }
       {role === 'Manager' || role === 'Developer' ? 
-        <Button sx={{color: theme.palette.secondary.main}} onClick={completeTicket}>Complete</Button>
+        <PrimaryButton variant='contained' onClick={completeTicket}>Complete</PrimaryButton>
       :
         null
       }

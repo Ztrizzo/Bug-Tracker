@@ -1,7 +1,9 @@
+import { useTheme } from "@emotion/react";
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
 
 export default function DeveloperGraph({ allTickets }){
+  const theme = useTheme();
 
   const ticketsPerDeveloper = allTickets.reduce((accum, ticket) => {
     if(!ticket.user)
@@ -20,7 +22,7 @@ export default function DeveloperGraph({ allTickets }){
     datasets: [{
       label: 'Tickets per Developer',
       data: Object.values(ticketsPerDeveloper),
-      backgroundColor: Object.keys(ticketsPerDeveloper).map((_) => '#' + Math.floor(Math.random()*16777215).toString(16)), //Each dev gets a randomly generated color
+      backgroundColor: Object.keys(ticketsPerDeveloper).map((_) => theme.palette.secondary[Object.keys(theme.palette.secondary)[Math.floor(Math.random() * Object.keys(theme.palette.secondary).length)]]), //Each dev gets a randomly generated color
       hoverOffset:4
     }]
     
