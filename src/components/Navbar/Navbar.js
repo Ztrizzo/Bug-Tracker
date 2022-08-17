@@ -4,17 +4,15 @@ import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import AppBar from './AppBar';
 import CssBaseline from '@mui/material/CssBaseline';
-import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
 import DrawerHeader from './DrawerHeader';
-import { Link, useLocation } from "react-router-dom";
 import LocalActivityIcon from '@mui/icons-material/LocalActivity';
 import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
 import AddIcon from '@mui/icons-material/Add';
 import BugReportIcon from '@mui/icons-material/BugReport';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
+import NavbarIcon from '../../styledComponents/NavbarIcon/NavbarIcon';
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -38,9 +36,6 @@ const closedMixin = (theme) => ({
   },
 });
 
-
-
-
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     width: drawerWidth,
@@ -59,9 +54,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function Navbar({isLoggedIn, role}) {
-  const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const location = useLocation();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -77,41 +70,35 @@ export default function Navbar({isLoggedIn, role}) {
       <Drawer variant="permanent" open={open}>
         <DrawerHeader handleDrawerClose={handleDrawerClose}/>
         <Divider />
-        <IconButton component={Link} to='/' sx={{backgroundColor: location.pathname === '/' ? theme.palette.secondary.light : null}}>
+        <NavbarIcon to='/' open={open} text='Home'>
           <BugReportIcon/>
-          { open ? <Typography>Home</Typography> : null}
-        </IconButton>
+        </NavbarIcon>
 
         {role === 'Developer' || role === 'Manager' ?
-          <IconButton component={Link} to='/myTickets' sx={{backgroundColor: location.pathname === '/myTickets' ? theme.palette.secondary.light : null}}>
+          <NavbarIcon to='/myTickets' text='My Tickets' open={open}>
             <LocalActivityIcon/>
-            { open ? <Typography>My Tickets</Typography> : null}
-          </IconButton>
+          </NavbarIcon>
           :
           null
         }
 
-        <IconButton component={Link} to='/allTickets' sx={{backgroundColor: location.pathname === '/allTickets' ? theme.palette.secondary.light : null}}>
+        <NavbarIcon to='/allTickets' open={open} text='All Tickets'>
           <AllInclusiveIcon/>
-          { open ? <Typography>All Tickets</Typography> : null}
-        </IconButton>
+        </NavbarIcon>
 
         {!isLoggedIn ? 
-          <IconButton component={Link} to='/auth'  sx={{backgroundColor: location.pathname === '/auth' ? theme.palette.secondary.light : null}}>
+          <NavbarIcon to='/auth' open={open} text='Log In'>
             <LoginIcon/>
-            { open ? <Typography>Log In</Typography> : null}
-          </IconButton>
+          </NavbarIcon>
           :
-          <IconButton component={Link} to='/auth'  sx={{backgroundColor: location.pathname === '/auth' ? theme.palette.secondary.light : null}}>
+          <NavbarIcon to='/auth' open={open} text='Log Out'>
             <LogoutIcon/>
-            { open ? <Typography>Log Out</Typography> : null}
-          </IconButton>
+          </NavbarIcon>
         }
         {isLoggedIn ? 
-          <IconButton component={Link} to='/CreateTicket'  sx={{backgroundColor: location.pathname === '/CreateTicket' ? theme.palette.secondary.light : null}}>
+          <NavbarIcon to='/CreateTicket'  open={open} text='Create Ticket'>
             <AddIcon/>
-            { open ? <Typography>Create Ticket</Typography> : null}
-          </IconButton>
+          </NavbarIcon>
         :
           null
         }
