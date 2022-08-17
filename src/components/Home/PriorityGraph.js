@@ -1,8 +1,10 @@
 import React from "react";
 import { Doughnut } from 'react-chartjs-2';
 import 'chart.js/auto';
-export default function PriorityGraph({ allTickets }){
+import { useTheme } from "@emotion/react";
 
+export default function PriorityGraph({ allTickets }){
+  const theme = useTheme();
   const data = {
     labels: [
       '*',
@@ -23,11 +25,11 @@ export default function PriorityGraph({ allTickets }){
         return accum;
       }, {1:0, 2:0, 3:0, 4:0, 5:0})),
       backgroundColor:[
-        'green',
-        'yellowgreen',
-        'yellow',
-        'orange',
-        'red'
+        theme.palette.secondary[100],
+        theme.palette.secondary[300],
+        theme.palette.secondary[500],
+        theme.palette.secondary[700],
+        theme.palette.secondary[800],
       ],
       hoverOffset: 4
     }]

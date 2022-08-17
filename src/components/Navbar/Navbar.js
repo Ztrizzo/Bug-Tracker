@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import DrawerHeader from './DrawerHeader';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import LocalActivityIcon from '@mui/icons-material/LocalActivity';
 import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
 import AddIcon from '@mui/icons-material/Add';
@@ -61,6 +61,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function Navbar({isLoggedIn, role}) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const location = useLocation();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -69,7 +70,6 @@ export default function Navbar({isLoggedIn, role}) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -77,13 +77,13 @@ export default function Navbar({isLoggedIn, role}) {
       <Drawer variant="permanent" open={open}>
         <DrawerHeader handleDrawerClose={handleDrawerClose}/>
         <Divider />
-        <IconButton component={Link} to='/'>
+        <IconButton component={Link} to='/' sx={{backgroundColor: location.pathname === '/' ? theme.palette.secondary.light : null}}>
           <BugReportIcon/>
           { open ? <Typography>Home</Typography> : null}
         </IconButton>
 
         {role === 'Developer' || role === 'Manager' ?
-          <IconButton component={Link} to='/myTickets'>
+          <IconButton component={Link} to='/myTickets' sx={{backgroundColor: location.pathname === '/myTickets' ? theme.palette.secondary.light : null}}>
             <LocalActivityIcon/>
             { open ? <Typography>My Tickets</Typography> : null}
           </IconButton>
@@ -91,24 +91,24 @@ export default function Navbar({isLoggedIn, role}) {
           null
         }
 
-        <IconButton component={Link} to='/allTickets'>
+        <IconButton component={Link} to='/allTickets' sx={{backgroundColor: location.pathname === '/allTickets' ? theme.palette.secondary.light : null}}>
           <AllInclusiveIcon/>
           { open ? <Typography>All Tickets</Typography> : null}
         </IconButton>
 
         {!isLoggedIn ? 
-          <IconButton component={Link} to='/auth'>
+          <IconButton component={Link} to='/auth'  sx={{backgroundColor: location.pathname === '/auth' ? theme.palette.secondary.light : null}}>
             <LoginIcon/>
             { open ? <Typography>Log In</Typography> : null}
           </IconButton>
           :
-          <IconButton component={Link} to='/auth'>
+          <IconButton component={Link} to='/auth'  sx={{backgroundColor: location.pathname === '/auth' ? theme.palette.secondary.light : null}}>
             <LogoutIcon/>
             { open ? <Typography>Log Out</Typography> : null}
           </IconButton>
         }
         {isLoggedIn ? 
-          <IconButton component={Link} to='/CreateTicket'>
+          <IconButton component={Link} to='/CreateTicket'  sx={{backgroundColor: location.pathname === '/CreateTicket' ? theme.palette.secondary.light : null}}>
             <AddIcon/>
             { open ? <Typography>Create Ticket</Typography> : null}
           </IconButton>
