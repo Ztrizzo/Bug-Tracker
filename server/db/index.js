@@ -7,8 +7,9 @@ const Comment = require('./models/Comment');
 const Ticket = require('./models/Ticket');
 
 //associations
-User.hasMany(Ticket);
-Ticket.belongsTo(User);
+User.hasMany(Ticket, {as: 'assignedTo'});
+Ticket.belongsTo(User, {as: 'assignedTo'});
+Ticket.belongsTo(User, {as: 'completedBy'});
 
 User.hasMany(Comment);
 Comment.belongsTo(User);
