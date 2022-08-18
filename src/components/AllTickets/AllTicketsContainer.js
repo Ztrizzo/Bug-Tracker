@@ -14,7 +14,6 @@ export default function AllTicketsContainer(){
     )
   }, [])
 
-  
   return(
     <AllTickets allTickets={allTickets}/>
   )

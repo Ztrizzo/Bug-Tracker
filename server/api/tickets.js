@@ -24,7 +24,10 @@ router.get('/completed', async (req, res, next) => {
       where:{
         completed: true
       },
-      include: {model: User, as: 'assignedTo'}
+      include: [
+        {model: User, as: 'assignedTo'},
+        {model: User, as: 'completedBy'}
+      ]
     });
     res.status(200).send(completedTickets);
   }
@@ -43,7 +46,12 @@ router.get('/:id', async (req, res, next) => {
       }, {
         model: Comment,
         include: [User]
-      }]
+      }, {
+        model: User,
+        as: 'completedBy'
+      }
+    
+    ]
     }))?.dataValues;
     if(!ticket){
       res.status(404).send();
@@ -82,6 +90,7 @@ router.put('/:id/complete', jwtCheck, async (req, res, next) => {
       return;
     }
     const ticket = await Ticket.findByPk(req.params.id);
+    ticket.completedById = req.auth.sub;
     ticket.completed = true;
     ticket.completedOn = new Date();
     await ticket.save();
