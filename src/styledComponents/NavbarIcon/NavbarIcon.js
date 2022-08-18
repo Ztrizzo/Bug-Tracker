@@ -13,7 +13,9 @@ const NavbarIcon = (props) => {
     <IconButton
       {...props}
       component={Link}
-      sx={{backgroundColor: location.pathname === to ? theme.palette.secondary.light : null}}
+      sx={{backgroundColor: location.pathname === to ? theme.palette.secondary.light : null,
+        margin: '0 10px'
+      }}
     >
       {props.children}
       { open ? <Typography>{text}</Typography> : null}
