@@ -92,7 +92,7 @@ export default function TicketContainer(){
     }
   }
 
-
+  console.log(ticket);
   return(
     <Ticket 
       ticket={ticket} 

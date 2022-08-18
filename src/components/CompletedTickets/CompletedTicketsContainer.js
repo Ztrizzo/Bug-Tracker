@@ -14,7 +14,6 @@ export default function CompletedTicketsContainer(){
   }, [])
 
   if(!tickets) return null;
-  
   return(
     <CompletedTickets tickets={tickets}/>
   )
