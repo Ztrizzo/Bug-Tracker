@@ -27,7 +27,7 @@ export default function AllTickets({ allTickets }){
   allTickets = allTickets.map(ticket => {
     return{
       ...ticket,
-      assignedTo: ticket.user?.name || 'unassigned',
+      assignedTo: ticket.assignedTo?.name || 'unassigned',
       priority: Array(ticket.priority).fill('★').join(''),
       posted: Date.now() - (Date.now() - new Date(ticket.createdAt)) //milliseconds since created
     }

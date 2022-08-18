@@ -16,7 +16,7 @@ export default function TicketContainer(){
   const loadTicket = async () => {
     const newTicket = (await axios.get(`/api/tickets/${ticketId}`)).data;
     setTicket(newTicket);
-    setAssignedDeveloper(newTicket.userId || 'unassigned');
+    setAssignedDeveloper(newTicket.assignedToId || 'unassigned');
   };
 
 

@@ -9,7 +9,7 @@ router.get('/', async(req, res, next) => {
       where: {
         completed: false
       },
-      include: [User]
+      include: {model: User, as: 'assignedTo'}
     });
     res.send(tickets);
   }
@@ -24,7 +24,7 @@ router.get('/completed', async (req, res, next) => {
       where:{
         completed: true
       },
-      include: [User]
+      include: {model: User, as: 'assignedTo'}
     });
     res.status(200).send(completedTickets);
   }
@@ -38,7 +38,8 @@ router.get('/:id', async (req, res, next) => {
     const ticket = (await Ticket.findOne({
       where:{ id: req.params.id },
       include: [{
-        model: User
+        model: User,
+        as: 'assignedTo'
       }, {
         model: Comment,
         include: [User]
@@ -111,7 +112,7 @@ router.post('/', async (req, res, next) =>{
 router.put('/assign', jwtCheck, async (req, res ,next) => {
   try{
     const ticket = await Ticket.findByPk(req.body.ticketId);
-    ticket.userId = req.body.userId;
+    ticket.assignedToId = req.body.userId;
     await ticket.save();
     res.status(204).send();
   }

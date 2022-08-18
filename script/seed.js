@@ -31,7 +31,7 @@ async function seed() {
         title: faker.lorem.lines(1), 
         description: faker.lorem.paragraph(), 
         createdBy: users[Math.floor(Math.random() * users.length)].id,
-        userId: users[Math.floor(Math.random() * users.length)].id,
+        assignedToId: users[Math.floor(Math.random() * users.length)].id,
         priority: Math.ceil(Math.random() * 5),
         createdAt: randomDate(new Date(2022, 4), new Date())
       }))

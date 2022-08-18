@@ -6,13 +6,13 @@ export default function DeveloperGraph({ allTickets }){
   const theme = useTheme();
 
   const ticketsPerDeveloper = allTickets.reduce((accum, ticket) => {
-    if(!ticket.user)
+    if(!ticket.assignedTo)
       accum['Unassigned'] += 1;
-    else if(accum[ticket.user.name]){
-      accum[ticket.user.name]++;
+    else if(accum[ticket.assignedTo.name]){
+      accum[ticket.assignedTo.name]++;
     }
     else{
-      accum[ticket.user.name] = 1;
+      accum[ticket.assignedTo.name] = 1;
     }
     return accum;
   }, {'Unassigned': 0})
