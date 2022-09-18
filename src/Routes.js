@@ -11,6 +11,7 @@ import MyTickets from './components/MyTickets';
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from 'axios';
 import CompletedTickets from './components/CompletedTickets';
+import CssBaseline from '@mui/material/CssBaseline';
 
 const ClientRoutes = () => {
   const dispatch = useDispatch();
@@ -51,22 +52,24 @@ const ClientRoutes = () => {
 
   return (
     <>
-      <Navbar/>
-      <div style={{paddingTop: '75px', paddingLeft: '75px'}}>
-        <Routes>
-          <Route path='/' element={<Home/>}/>
-          <Route path='auth' element={<AuthForm/>}/>
-          <Route path='alltickets' element={<AllTickets/>}/>
-          <Route path='CreateTicket' element={<NewTicket/>}/>
-          <Route path='CompletedTickets' element={<CompletedTickets/>}/>
-          <Route path='tickets'>
-            <Route path=':ticketId' element={<Ticket/>}/>
-          </Route>
-          <Route path='MyTickets' element={<MyTickets/>}/>
-          <Route path='*' element={<Home/>}></Route>
-          
-        </Routes>
-      </div>
+      <CssBaseline>
+        <Navbar/>
+        <div style={{paddingTop: '75px', paddingLeft: '75px'}}>
+          <Routes>
+            <Route path='/' element={<Home/>}/>
+            <Route path='auth' element={<AuthForm/>}/>
+            <Route path='alltickets' element={<AllTickets/>}/>
+            <Route path='CreateTicket' element={<NewTicket/>}/>
+            <Route path='CompletedTickets' element={<CompletedTickets/>}/>
+            <Route path='tickets'>
+              <Route path=':ticketId' element={<Ticket/>}/>
+            </Route>
+            <Route path='MyTickets' element={<MyTickets/>}/>
+            <Route path='*' element={<Home/>}></Route>
+            
+          </Routes>
+        </div>
+      </CssBaseline>
 
     </>
 

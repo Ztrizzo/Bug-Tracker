@@ -1,10 +1,10 @@
 import React from "react";
+import { Card } from "@mui/material";
 
 export default function NewTicket({ handleChange, formInfo, handleSubmit }){
   return(
-    <div>
+    <Card className='card-container'>
       <form onSubmit={handleSubmit}>
-        <h1>NEW TICKET</h1>
         <div>Title<input name="title" value={formInfo.title} onChange={handleChange}/></div>
         <div>Description<input name="description" value={formInfo.description} onChange={handleChange}/></div>
         <div>
@@ -20,6 +20,6 @@ export default function NewTicket({ handleChange, formInfo, handleSubmit }){
         
         <button>Submit</button>
       </form>
-    </div>
+    </Card>
   )
 }

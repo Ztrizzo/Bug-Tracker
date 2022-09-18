@@ -1,6 +1,8 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
+import Card from '@mui/material/Card';
 
+import { Typography } from "@mui/material";
 export default function AgeGraph({ allTickets }){
 
   const ticketAges = allTickets.reduce((accum, ticket) => {
@@ -35,8 +37,12 @@ export default function AgeGraph({ allTickets }){
   
   return(
     <div>
-      <h1>Ticket Age</h1>
-      <Bar data={data}/>
+      <Typography variant="h4">Ticket Age</Typography>
+      <Card className="graph-container">
+        <Bar data={data}/>
+      </Card>
     </div>
+
+
   )
 }

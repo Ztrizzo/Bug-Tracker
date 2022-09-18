@@ -5,6 +5,8 @@ import DoughnutGraph from './PriorityGraph';
 import DeveloperGraph from './DeveloperGraph';
 import AgeGraph from './AgeGraph';
 import NumTickets from './NumTickets';
+import { Typography } from '@mui/material';
+
 /**
  * COMPONENT
  */
@@ -12,16 +14,12 @@ export default function Home({ isLoggedIn, name, allTickets }){
 
   return (
     <div>
-      {isLoggedIn ? <h3>{`Welcome, ${name}`}</h3> : null}
-      <div style={{display: 'flex', flexDirection:'column'}}>
-        <div style={{display: 'flex', width: '100%', justifyContent:'space-around'}}>
-          <DoughnutGraph allTickets={allTickets}/>
-          <DeveloperGraph  allTickets={allTickets}/>
-        </div>
-        <div style={{display: 'flex', width: '100%', justifyContent:'space-around'}}>
-          <AgeGraph allTickets={allTickets}/>
-          <NumTickets allTickets={allTickets}/>
-        </div>
+      {/* {isLoggedIn ? <h3>{`Welcome, ${name}`}</h3> : null} */}
+      <div style={{display: 'flex', flexWrap: 'wrap'}}>
+        <DoughnutGraph allTickets={allTickets}/>
+        <DeveloperGraph  allTickets={allTickets}/>
+        <AgeGraph allTickets={allTickets}/>
+        <NumTickets allTickets={allTickets}/>
 
       </div>
 

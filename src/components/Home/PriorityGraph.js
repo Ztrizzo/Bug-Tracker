@@ -2,6 +2,8 @@ import React from "react";
 import { Doughnut } from 'react-chartjs-2';
 import 'chart.js/auto';
 import { useTheme } from "@emotion/react";
+import Card from '@mui/material/Card';
+import { Typography } from "@mui/material";
 
 export default function PriorityGraph({ allTickets }){
   const theme = useTheme();
@@ -36,9 +38,13 @@ export default function PriorityGraph({ allTickets }){
   }
   return (
     <div>
-      <h1>Ticket Priority</h1>
-      <Doughnut data={data}/>
+      <Typography variant="h4">Ticket Priority</Typography>
+      <Card className="graph-container">
+        
+        <Doughnut data={data}/>
+      </Card>
     </div>
+
 
   )
 }

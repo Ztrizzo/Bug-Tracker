@@ -1,6 +1,9 @@
 import { useTheme } from "@emotion/react";
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
+import Card from '@mui/material/Card';
+
+import { Typography } from "@mui/material";
 
 export default function DeveloperGraph({ allTickets }){
   const theme = useTheme();
@@ -30,8 +33,12 @@ export default function DeveloperGraph({ allTickets }){
   
   return (
     <div>
-      <h1>Developer Graph</h1>
-      <Doughnut data={data}/>
+      <Typography variant="h4">Developer Graph</Typography>
+      <Card className="graph-container">
+        
+        <Doughnut data={data}/>
+      </Card>
     </div>
+
   )
 }
