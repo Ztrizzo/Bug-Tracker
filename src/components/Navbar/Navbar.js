@@ -3,7 +3,6 @@ import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import AppBar from './AppBar';
-import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import DrawerHeader from './DrawerHeader';
 import LocalActivityIcon from '@mui/icons-material/LocalActivity';
@@ -66,7 +65,6 @@ export default function Navbar({isLoggedIn, role}) {
   };
   return (
     <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
       <AppBar drawerWidth={drawerWidth} open={open} handleDrawerOpen={handleDrawerOpen}/>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader handleDrawerClose={handleDrawerClose}/>

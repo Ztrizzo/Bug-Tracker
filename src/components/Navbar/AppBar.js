@@ -6,9 +6,12 @@ import MenuIcon from '@mui/icons-material/Menu';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 
+import { useLocation } from "react-router-dom";
+
 
 
 export default function AppBar({ open, handleDrawerOpen, drawerWidth }){
+  const location = useLocation();
   const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
   })(({ theme, open }) => ({
@@ -43,7 +46,12 @@ export default function AppBar({ open, handleDrawerOpen, drawerWidth }){
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Bug Tracker
+            {location.pathname === '/' ? 'Home' : null}
+            {location.pathname === '/myTickets' ? 'My Tickets' : null}
+            {location.pathname === '/allTickets' ? 'All Tickets' : null}
+            {location.pathname === '/auth' ? 'Login/Logout' : null}
+            {location.pathname === '/CreateTicket' ? 'Create a Ticket' : null}
+            {location.pathname === '/completedTickets' ? 'Completed Tickets' : null}
           </Typography>
         </Toolbar>
       </AppBar>
